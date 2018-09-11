@@ -6,5 +6,5 @@ import java.io.File
 abstract class AbstractTest : AbstractModuleTestSupport() {
     override fun getPackageLocation() = null
 
-    fun getFile(name: String): String =File(javaClass.getResource(name).toURI()).canonicalPath
+    fun getFile(name: String): String = File(javaClass.getResource(name).toURI()).canonicalPath
 }
