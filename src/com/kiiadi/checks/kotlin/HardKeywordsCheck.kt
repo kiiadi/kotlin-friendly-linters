@@ -18,10 +18,13 @@ class HardKeywordsCheck : RequiredTokenCheck() {
     override fun visitToken(ast: DetailAST?) {
         super.visitToken(ast)
         ast ?: return
-        if (ast.containsModifier(TokenTypes.LITERAL_PUBLIC) ||
-            ast.containsModifier(TokenTypes.LITERAL_PROTECTED) ||
-            ast.parent?.parent?.type == TokenTypes.INTERFACE_DEF
-        ) {
+        val parentClass = ast.parent?.parent ?: return
+
+        if (!parentClass.isExternallyAccessible) {
+            return
+        }
+
+        if (ast.isExternallyAccessible || ast.parent?.parent?.type == TokenTypes.INTERFACE_DEF) {
             when (ast.type) {
                 TokenTypes.METHOD_DEF -> checkMethod(ast)
                 TokenTypes.VARIABLE_DEF -> checkVariable(ast)
@@ -51,7 +54,12 @@ class HardKeywordsCheck : RequiredTokenCheck() {
         private const val OVERRIDE = "Override"
         private const val CANONICAL_OVERRIDE = "java.lang.$OVERRIDE"
         private val HARD_KEYWORDS = setOf("is", "as", "object", "typealias", "val", "var", "when", "in")
-        fun DetailAST.containsModifier(modifierType: Int) = findFirstToken(TokenTypes.MODIFIERS).findFirstToken(modifierType) != null
+
+        val DetailAST.isExternallyAccessible: Boolean
+            get() {
+                val modifiers = findFirstToken(TokenTypes.MODIFIERS)
+                return modifiers.findFirstToken(TokenTypes.LITERAL_PUBLIC) != null || modifiers.findFirstToken(TokenTypes.LITERAL_PROTECTED) != null
+            }
     }
 }
 

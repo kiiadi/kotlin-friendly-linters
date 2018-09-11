@@ -12,7 +12,9 @@ class HardKeywordsCheckTest : AbstractTest() {
             expectation("6:5", "in"),
             expectation("10:5", "var"),
             expectation("13:9", "as"),
-            expectation("16:5", "typealias")
+            expectation("16:5", "typealias"),
+            expectation("33:9", "in"),
+            expectation("35:9", "var")
         )
 
         verify(config, getFile("HardKeywordsInIdentifiers.java"), *expected)
