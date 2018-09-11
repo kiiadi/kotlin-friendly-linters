@@ -1,1 +1,2 @@
-rootProject.name = 'kotlin-friendly-checks'
+rootProject.name = 'kotlin-friendly-linters'
+include("checkstyle")

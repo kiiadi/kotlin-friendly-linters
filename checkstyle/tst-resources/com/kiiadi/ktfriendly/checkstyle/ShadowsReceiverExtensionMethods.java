@@ -1,4 +1,4 @@
-package com.kiiadi.checks.kotlin;
+package com.kiiadi.ktfriendly.checkstyle;
 
 import java.util.function.Consumer;
 

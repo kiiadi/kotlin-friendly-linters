@@ -1,4 +1,4 @@
-package com.kiiadi.checks.kotlin;
+package com.kiiadi.ktfriendly.checkstyle;
 
 public class HasInvalidIdentifiers {
     public static final String invalid = "hello";
@@ -17,7 +17,7 @@ public class HasInvalidIdentifiers {
 
     private String invalid = "foo";
 
-    private void invalid() {
+    private void invalid(String param) {
 
     }
 
@@ -45,6 +45,6 @@ public class HasInvalidIdentifiers {
     //Should be ignored, since it's overriding
     @Override
     public String invalid(String input) {
-
+        return input;
     }
 }

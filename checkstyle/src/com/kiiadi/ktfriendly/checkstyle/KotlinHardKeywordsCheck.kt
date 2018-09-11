@@ -1,4 +1,4 @@
-package com.kiiadi.checks.kotlin
+package com.kiiadi.ktfriendly.checkstyle
 
 import com.puppycrawl.tools.checkstyle.StatelessCheck
 
@@ -8,7 +8,7 @@ import com.puppycrawl.tools.checkstyle.StatelessCheck
  */
 
 @StatelessCheck
-class HardKeywordsCheck : AbstractInvalidIdentifiersCheck(HARD_KEYWORDS, "kotlin.hard.keyword") {
+class KotlinHardKeywordsCheck : AbstractInvalidIdentifiersCheck(HARD_KEYWORDS, "kotlin.hard.keyword") {
     private companion object {
         private val HARD_KEYWORDS = setOf("is", "as", "object", "typealias", "val", "var", "when", "in")
     }

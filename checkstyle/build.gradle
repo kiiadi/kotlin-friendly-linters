@@ -1,0 +1,4 @@
+dependencies {
+    compile "com.puppycrawl.tools:checkstyle:8.12"
+    testCompile group: 'com.puppycrawl.tools', name: 'checkstyle', version: '8.12', classifier: 'tests'
+}

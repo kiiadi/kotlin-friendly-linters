@@ -1,4 +1,4 @@
-package com.kiiadi.checks.kotlin
+package com.kiiadi.ktfriendly.checkstyle
 
 import com.puppycrawl.tools.checkstyle.AbstractModuleTestSupport
 import java.io.File

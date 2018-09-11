@@ -1,12 +1,12 @@
-package com.kiiadi.checks.kotlin
+package com.kiiadi.ktfriendly.checkstyle
 
 import org.junit.Test
 
-class ShadowsReceiverExtensionMethodCheckTest : AbstractTest() {
+class KotlinExtensionMethodShadowCheckTest : AbstractTest() {
 
     @Test
     fun invalidExtensionMethodShadowing() {
-        val config = createModuleConfig(ShadowsReceiverExtensionMethodCheck::class.java)
+        val config = createModuleConfig(KotlinExtensionMethodShadowCheck::class.java)
 
         val expected = arrayOf(
             expectation("7:5", "apply"),

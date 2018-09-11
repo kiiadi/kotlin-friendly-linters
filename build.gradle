@@ -4,44 +4,45 @@ buildscript {
     ext.kotlinVersion = "$kotlinVersion"
 
     repositories {
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
         mavenCentral()
         jcenter()
     }
+
     dependencies {
-        classpath "com.atlassian.commonmark:commonmark:0.11.0"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "org.jetbrains.dokka:dokka-gradle-plugin:$dokkaVersion"
     }
 }
 
-repositories {
-    mavenCentral()
-}
-
-group = "com.kiiadi.checks"
+group = "com.kiiadi.ktfriendly"
 version = "0.1-SNAPSHOT"
 
-apply plugin: 'java'
-apply plugin: 'kotlin'
-apply plugin: 'org.jetbrains.dokka'
+subprojects {
+    repositories {
+        mavenCentral()
+    }
 
-sourceSets {
-    main.java.srcDir 'src'
-    main.resources.srcDir 'resources'
-    test.java.srcDir 'tst'
-    test.resources.srcDir 'tst-resources'
-}
+    apply plugin: 'java'
+    apply plugin: 'kotlin'
+    apply plugin: 'org.jetbrains.dokka'
+    apply plugin: 'maven'
 
-dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
-    compile "com.puppycrawl.tools:checkstyle:8.12"
-    testCompile "junit:junit:4.12"
-    testCompile group: 'com.puppycrawl.tools', name: 'checkstyle', version: '8.12', classifier: 'tests'
-}
+    group = parent.group
+    version = parent.version
 
-tasks.withType(KotlinCompile).all {
-    kotlinOptions.jvmTarget = "1.8"
+    sourceSets {
+        main.java.srcDir 'src'
+        main.resources.srcDir 'resources'
+        test.java.srcDir 'tst'
+        test.resources.srcDir 'tst-resources'
+    }
+
+    dependencies {
+        compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+        testCompile "junit:junit:4.12"
+    }
+
+    tasks.withType(KotlinCompile).all {
+        kotlinOptions.jvmTarget = "1.8"
+    }
 }
