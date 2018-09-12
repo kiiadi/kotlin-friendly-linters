@@ -42,6 +42,13 @@ subprojects {
         toolVersion = "0.8.2"
     }
 
+    jacocoTestReport {
+        reports {
+            xml.enabled true
+            
+        }
+    }
+
     dependencies {
         compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
         testCompile "junit:junit:4.12"
