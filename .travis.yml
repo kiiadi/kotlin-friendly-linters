@@ -5,4 +5,5 @@ jdk:
 - oraclejdk8
 
 script:
-- ./gradlew build --scan -s
+- ./gradlew build --info -s
+- bash <(curl -s https://codecov.io/bash)
