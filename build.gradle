@@ -11,11 +11,44 @@ buildscript {
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "org.jetbrains.dokka:dokka-gradle-plugin:$dokkaVersion"
+        classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
+        classpath 'net.researchgate:gradle-release:2.6.0'
     }
 }
 
 group = "com.kiiadi.ktfriendly"
 version = "0.1-SNAPSHOT"
+
+allprojects {
+    apply plugin: 'com.bmuschko.nexus'
+
+    modifyPom {
+        project {
+            url 'https://github.com/kiiadi/kotlin-friendly-linters'
+
+            scm {
+                url 'https://github.com/kiiadi/kotlin-friendly-linters'
+                connection 'scm:https://kiiadi@github.com/kiiadi/kotlin-friendly-linters.git'
+                developerConnection 'scm:git://github.com/kiiadi/kotlin-friendly-linters.git'
+            }
+
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    distribution 'repo'
+                }
+            }
+
+            developers {
+                developer {
+                    id 'kiiadi'
+                    name 'Kyle Thomson'
+                }
+            }
+        }
+    }
+}
 
 subprojects {
     repositories {
@@ -27,6 +60,7 @@ subprojects {
     apply plugin: 'org.jetbrains.dokka'
     apply plugin: 'maven'
     apply plugin: 'jacoco'
+    apply plugin: 'net.researchgate.release'
 
     group = parent.group
     version = parent.version
@@ -36,6 +70,12 @@ subprojects {
         main.resources.srcDir 'resources'
         test.java.srcDir 'tst'
         test.resources.srcDir 'tst-resources'
+    }
+
+    release {
+        git {
+            pushToRemote = 'origin2'
+        }
     }
 
     jacoco {

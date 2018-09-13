@@ -1,3 +1,10 @@
+modifyPom {
+    project {
+        name 'Kotlin Friendly Checkstyle Checks'
+        description 'Checkstyle rules that highlight potential problems with a Java library that may make it unfriendly to Kotlin consumers.'
+    }
+}
+
 dependencies {
     compile "com.puppycrawl.tools:checkstyle:8.12"
     testCompile group: 'com.puppycrawl.tools', name: 'checkstyle', version: '8.12', classifier: 'tests'
