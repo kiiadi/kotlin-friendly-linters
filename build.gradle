@@ -17,7 +17,13 @@ buildscript {
 }
 
 group = "com.kiiadi.ktfriendly"
-version = "0.1-SNAPSHOT"
+
+apply plugin: 'net.researchgate.release'
+
+release {
+    failOnPublishNeeded = false
+    buildTasks = ['build', 'uploadArchives']
+}
 
 allprojects {
     apply plugin: 'com.bmuschko.nexus'
@@ -60,7 +66,6 @@ subprojects {
     apply plugin: 'org.jetbrains.dokka'
     apply plugin: 'maven'
     apply plugin: 'jacoco'
-    apply plugin: 'net.researchgate.release'
 
     group = parent.group
     version = parent.version
@@ -70,12 +75,6 @@ subprojects {
         main.resources.srcDir 'resources'
         test.java.srcDir 'tst'
         test.resources.srcDir 'tst-resources'
-    }
-
-    release {
-        git {
-            pushToRemote = 'origin2'
-        }
     }
 
     jacoco {
