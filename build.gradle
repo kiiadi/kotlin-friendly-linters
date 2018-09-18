@@ -22,7 +22,9 @@ apply plugin: 'net.researchgate.release'
 
 release {
     failOnPublishNeeded = false
-    buildTasks = ['build', 'uploadArchives']
+    buildTasks = ['build']
+    preTagCommitMessage = '[Release] Updating to release version:'
+    newVersionCommitMessage = '[Release] Updating to new snapshot version:'
 }
 
 allprojects {
@@ -76,6 +78,8 @@ subprojects {
         test.java.srcDir 'tst'
         test.resources.srcDir 'tst-resources'
     }
+
+    project.parent.tasks.findByName('afterReleaseBuild').dependsOn(uploadArchives)
 
     jacoco {
         toolVersion = "0.8.2"
