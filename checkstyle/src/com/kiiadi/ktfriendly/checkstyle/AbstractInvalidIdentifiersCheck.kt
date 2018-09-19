@@ -12,8 +12,7 @@ abstract class AbstractInvalidIdentifiersCheck(private val invalidIdentifiers: S
 
     override fun visitToken(ast: DetailAST?) {
         super.visitToken(ast)
-        ast ?: return
-        val parentClass = ast.parent?.parent ?: return
+        val parentClass = ast?.parent?.parent ?: return
 
         if (!parentClass.isExternallyAccessible) {
             return
