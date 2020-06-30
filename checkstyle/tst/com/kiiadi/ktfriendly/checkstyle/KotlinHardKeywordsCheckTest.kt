@@ -9,8 +9,8 @@ class KotlinHardKeywordsCheckTest : AbstractTest() {
         val config = createModuleConfig(KotlinHardKeywordsCheck::class.java)
 
         val expected = arrayOf(
-            expectation("4:5", "when"),
-            expectation("5:5", "in")
+            expectation("7:5", "when"),
+            expectation("8:5", "in")
         )
 
         verify(config, getFile("HasKotlinHardKeyWords.java"), *expected)

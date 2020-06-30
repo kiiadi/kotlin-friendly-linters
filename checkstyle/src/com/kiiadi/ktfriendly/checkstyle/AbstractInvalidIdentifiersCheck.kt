@@ -12,13 +12,15 @@ abstract class AbstractInvalidIdentifiersCheck(private val invalidIdentifiers: S
 
     override fun visitToken(ast: DetailAST?) {
         super.visitToken(ast)
-        val parentClass = ast?.parent?.parent ?: return
+        val parentClass = ast?.parent?.parent?.takeIf {
+            it.type == TokenTypes.CLASS_DEF || it.type == TokenTypes.INTERFACE_DEF
+        } ?: return
 
         if (!parentClass.isExternallyAccessible) {
             return
         }
 
-        if (ast.isExternallyAccessible || ast.parent?.parent?.type == TokenTypes.INTERFACE_DEF) {
+        if (ast.isExternallyAccessible || parentClass.type == TokenTypes.INTERFACE_DEF) {
             when (ast.type) {
                 TokenTypes.METHOD_DEF -> checkMethod(ast)
                 TokenTypes.VARIABLE_DEF -> checkVariable(ast)
@@ -28,9 +30,9 @@ abstract class AbstractInvalidIdentifiersCheck(private val invalidIdentifiers: S
 
     private fun checkMethod(method: DetailAST) {
         if (AnnotationUtil.containsAnnotation(method, OVERRIDE) || AnnotationUtil.containsAnnotation(
-                method,
-                CANONICAL_OVERRIDE
-            )) {
+                        method,
+                        CANONICAL_OVERRIDE
+                )) {
             return
         }
         checkName(method)
