@@ -1,4 +1,4 @@
-[![Travis (.org)](https://img.shields.io/travis/kiiadi/kotlin-friendly-linters.svg)](https://www.travis-ci.org/kiiadi/kotlin-friendly-linters) [![Codecov](https://img.shields.io/codecov/c/github/kiiadi/kotlin-friendly-linters.svg)](https://codecov.io/github/kiiadi/kotlin-friendly-linters) [![Maven Central](https://img.shields.io/maven-central/v/com.kiiadi.ktfriendly/checkstyle.svg)](http://mvnrepository.com/artifact/com.kiiadi.ktfriendly)
+[![Build](https://github.com/kiiadi/kotlin-friendly-linters/workflows/build/badge.svg)](https://github.com/kiiadi/kotlin-friendly-linters/actions) [![Codecov](https://img.shields.io/codecov/c/github/kiiadi/kotlin-friendly-linters.svg)](https://codecov.io/github/kiiadi/kotlin-friendly-linters) [![Maven Central](https://img.shields.io/maven-central/v/com.kiiadi.ktfriendly/checkstyle.svg)](http://mvnrepository.com/artifact/com.kiiadi.ktfriendly)
 
 
 # Kotlin Friendly Linters
